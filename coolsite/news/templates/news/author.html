@@ -1,0 +1,25 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+Автори
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <h1>Статті авторів</h1>
+    {% for author in authors %}
+        <h2>Статті автора "{{ author.name }}"</h2>
+        {% if author.articles.all %}
+            {% for article in author.articles.all %}
+                <div class="alert alert-warning">
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.anons }}</p>
+                    <a href="{% url 'news_detail' article.id %}" class="btn btn-warning">Детальніше</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Немає статей цього автора</p>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

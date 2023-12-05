@@ -1,0 +1,17 @@
+{% extends 'main/layout.html' %}
+{% block title %}
+{{ artiles.title }}
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <h1>{{ artiles.title }} </h1>
+    <p>{{ artiles.data }}</p>
+    <p>{{ artiles.full_text }}</p>
+    <p>Теги: {% for tag in artiles.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <p>Автори: {% for author in artiles.authors.all %}{{ author.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <p>Категорії: {% for category in artiles.categories.all %}{{ category.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <a href="{% url 'news_delete' artiles.id %}" class="btn btn-danger">Видалити</a>
+    <a href="{% url 'news_update' artiles.id %}" class="btn btn-danger">Редагувати</a>
+</div>
+{% endblock %}

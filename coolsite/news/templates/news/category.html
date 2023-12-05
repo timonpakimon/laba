@@ -1,0 +1,25 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+Категорії
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <h1>Всі категорії</h1>
+    {% for category in categories %}
+        <h2>Статті в категорії "{{ category.name }}"</h2>
+        {% if category.articles.all %}
+            {% for article in category.articles.all %}
+                <div class="alert alert-warning">
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.anons }}</p>
+                    <a href="{% url 'news_detail' article.id %}" class="btn btn-warning">Детальніше</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Немає статей в цій категорії</p>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

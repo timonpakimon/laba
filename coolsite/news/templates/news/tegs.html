@@ -1,0 +1,25 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+Теги
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <h1>Всі теги</h1>
+    {% for tag in tags %}
+        <h3>Статті з тегом "{{ tag.name }}"</h3>
+        {% if tag.articles.all %}
+            {% for article in tag.articles.all %}
+                <div class="alert alert-warning">
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.anons }}</p>
+                    <a href="{% url 'news_detail' article.id %}" class="btn btn-warning">Детальніше</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Немає статей з цим тегом</p>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
